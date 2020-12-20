@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
-require './fizzbazz3'
+require '../lib/fizzbazz'
 
 class FizzBuzzTest < Minitest::Test
   # テストメソッドを実行
