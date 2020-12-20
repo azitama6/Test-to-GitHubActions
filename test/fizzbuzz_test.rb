@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'minitest/autorun'
 require './fizzbazz3'
 
@@ -13,4 +15,3 @@ class FizzBuzzTest < Minitest::Test
     assert_equal 'FizzBuzz', fizzbuzz(15)
   end
 end
-

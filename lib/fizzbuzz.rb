@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def fizzbuzz(num)
   # 3と5の倍数の場合
   if (num % 3).zero? && (num % 5).zero?
