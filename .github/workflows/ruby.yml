@@ -13,6 +13,9 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+
 jobs:
   rubocop-test:
     name: Rubocop
@@ -28,7 +31,24 @@ jobs:
       run: gem install rubocop-fjord
     - name: Check code
       run: rubocop
+      
+    # テスト成功時はこちらのステップが実行される
+    - name: Slack Notification on Success
+      if: success()
+      uses: rtCamp/action-slack-notify@v2.0.2
+      env:
+        SLACK_CHANNEL: test
+        SLACK_TITLE: rubocop Success
+        SLACK_COLOR: good
 
+    # テスト失敗時はこちらのステップが実行される
+    - name: Slack Notification on Failure
+      uses: rtCamp/action-slack-notify@v2.0.2
+      if: failure()
+      env:
+        SLACK_CHANNEL: test
+        SLACK_TITLE: Test Failure
+        SLACK_COLOR: danger
   test:
     name: Minitest
     needs: rubocop-test
@@ -43,3 +63,21 @@ jobs:
          
     - name: Run tests
       run: ruby test/fizzbuzz_test.rb 
+      
+    # テスト成功時はこちらのステップが実行される
+    - name: Slack Notification on Success
+      if: success()
+      uses: rtCamp/action-slack-notify@v2.0.2
+      env:
+        SLACK_CHANNEL: test
+        SLACK_TITLE: Test Success
+        SLACK_COLOR: good
+
+    # テスト失敗時はこちらのステップが実行される
+    - name: Slack Notification on Failure
+      uses: rtCamp/action-slack-notify@v2.0.2
+      if: failure()
+      env:
+        SLACK_CHANNEL: test
+        SLACK_TITLE: Test Failure
+        SLACK_COLOR: danger
