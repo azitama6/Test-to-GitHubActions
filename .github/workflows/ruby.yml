@@ -33,7 +33,7 @@ jobs:
       run: rubocop
       
     # テスト成功
-    - name: Slack Notification on Success
+    - name: Success
       if: success()
       uses: rtCamp/action-slack-notify@v2.0.2
       env:
@@ -42,7 +42,7 @@ jobs:
         SLACK_COLOR: good
 
     # テスト失敗
-    - name: Slack Notification on Failure
+    - name: Failure
       uses: rtCamp/action-slack-notify@v2.0.2
       if: failure()
       env:
@@ -65,7 +65,7 @@ jobs:
       run: ruby test/fizzbuzz_test.rb 
       
     # テスト成功
-    - name: Slack Notification on Success
+    - name: Success
       if: success()
       uses: rtCamp/action-slack-notify@v2.0.2
       env:
@@ -74,7 +74,7 @@ jobs:
         SLACK_COLOR: good
 
     # テスト失敗
-    - name: Slack Notification on Failure
+    - name: Failure
       uses: rtCamp/action-slack-notify@v2.0.2
       if: failure()
       env:
